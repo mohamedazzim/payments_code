@@ -1,0 +1,103 @@
+RAZOR PAY CODE:
+
+$('#pay-button').click(function(e) {
+            var selectedValue = $('input[name="myRadio"]:checked').val();
+            if (selectedValue) {
+            } else {
+            alert("Please select Terms and Conditions.");
+            exit();
+            }
+            e.preventDefault();
+            if (totalAmount > 0) {
+            var pamount = document.getElementById("paypartialamount"); 
+            var valuepartialamount = pamount.value; 
+            var paypartial=Number(valuepartialamount); 
+            var famount = document.getElementById("payfullamount"); 
+            var valuefullamount = famount.value; 
+            var payfullamount=Number(valuefullamount); 
+            var radiotype = document.getElementById("radiotype"); 
+            var eventamountstatus = radiotype.value; 
+            
+            //var eventamountstatus=1; 
+                
+            var options = { 
+            //"key": "rzp_live_yXWO4GFckJkl4y", 
+            "key": "rzp_test_ggrfAFLvv1VJYi", 
+            "amount": payfullamount * 100,  
+            "currency": "INR", 
+            "name": "TEERRAZOSPORTS", 
+            "description": "Booking Payment", 
+            "image": "https://teerrazosports.in/front/img/logo_web.png", 
+            "handler": function (response) { 
+            $('#payment-form').append('<input type="hidden" name="payment_type" value="1"><input type="hidden" name="totalvalue" value="' + payfullamount + '"><input type="hidden" name="eventamountstatus" value="' + eventamountstatus + '"><input type="hidden" name="payableamount" value="' + payfullamount + '"><input type="hidden" name="razorpay_payment_id" value="' + response.razorpay_payment_id + '">');
+            $('#payment-form').submit(); 
+            }, 
+            "prefill": { 
+            "name": "<?php echo $loginusername;?>", 
+            "email": "<?php echo $logemail;?>", 
+            "contact": "<?php echo $logincontact;?>" 
+            },
+            "theme": {
+            "color": "#28a745"
+            },
+            "capture": true 
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            } else {
+            alert('Please select at least one slot to proceed with the payment.');
+            }
+            });
+            $('#pay-buttonp').click(function(e) {
+            var selectedValue = $('input[name="myRadio"]:checked').val();
+            if (selectedValue) {
+            } else {
+            alert("Please select Terms and Conditions");
+            exit();
+            }
+            /*
+            
+            */
+                var pamount = document.getElementById("paypartialamount");
+                var valuepartialamount = pamount.value;
+                var paypartial=Number(valuepartialamount);
+                var famount = document.getElementById("payfullamount");
+                var valuefullamount = famount.value;
+                var payfullamount=Number(valuefullamount);
+                var radiotype = document.getElementById("radiotype"); 
+                var eventamountstatus = radiotype.value;
+                e.preventDefault();
+                if (totalAmount > 0) {
+                var totalp=paypartial;
+                var totalvalue=payfullamount;
+                var options = {
+                //"key": "rzp_live_yXWO4GFckJkl4y",
+                "key": "rzp_test_ggrfAFLvv1VJYi",
+                "amount": totalp * 100, 
+                "currency": "INR",
+                "name": "TEERRAZOSPORTS", 
+                "description": "Booking Payment", 
+                "image": "https://teerrazosports.in/front/img/logo_web.png",
+                "handler": function (response) {
+                $('#payment-form').append('<input type="hidden" name="payment_type" value="2"><input type="hidden" name="eventamountstatus" value="' + eventamountstatus + '"><input type="hidden" name="totalvalue" value="' + payfullamount + '"><input type="hidden" name="payableamount" value="' + paypartial + '"><input type="hidden" name="razorpay_payment_id" value="' + response.razorpay_payment_id + '">');
+                $('#payment-form').submit();
+                },
+                "prefill": {
+                "name": "<?php echo $loginusername;?>",
+                "email": "<?php echo $logemail;?>",
+                "contact": "<?php echo $logincontact;?>"
+                },
+                "theme": {
+                "color": "#28a745"
+                },
+                "capture": true 
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                } else {
+                alert('Please select at least one slot to proceed with the payment.');
+                }
+                });
+                });
+                
+        
